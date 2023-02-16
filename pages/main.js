@@ -12,7 +12,7 @@ const constantes = {
 
 };
 
-function Nombre_sueldo_email(nombre, sueldo, email){
+/*function Nombre_sueldo_email(nombre, sueldo, email){
 
     this.nombre = nombre;
 
@@ -22,7 +22,7 @@ function Nombre_sueldo_email(nombre, sueldo, email){
 
 }
 
-let nombres_sueldos = [];
+let nombres_sueldos = [];*/
 
 const boton_calcular = document.getElementById("boton_calcular");
 
@@ -60,9 +60,9 @@ boton_calcular.addEventListener("click", function(event){
 
     nodo_padre.replaceChild(formulario, div_ads)
 
-    let nombres_sueldos_local = JSON.parse(localStorage.getItem("nombresysueldos"));
+    /*let nombres_sueldos_local = JSON.parse(localStorage.getItem("nombresysueldos"));
 
-    nombres_sueldos_local.push(nombres_sueldos);
+    nombres_sueldos_local.push(nombres_sueldos);*/
 
 
         const boton_enviar = document.getElementById("boton_enviar");
@@ -194,7 +194,7 @@ boton_calcular.addEventListener("click", function(event){
 
             formulario_id.replaceWith(deducciones);
 
-            const nuevo_ingreso = new Nombre_sueldo_email(nombre, sueldo_neto, email);
+            /*const nuevo_ingreso = new Nombre_sueldo_email(nombre, sueldo_neto, email);
 
             nombres_sueldos.push(nuevo_ingreso);
 
@@ -202,7 +202,7 @@ boton_calcular.addEventListener("click", function(event){
 
             localStorage.setItem("nombresysueldos", nombres_sueldos_json);
 
-            console.log(nombres_sueldos);
+            console.log(nombres_sueldos);*/
 
         });
 
