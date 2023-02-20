@@ -4,10 +4,18 @@
     box-sizing: border-box;
 }
 
+header{
+    position: sticky;
+    top: 0;
+    background-color: white;
+    border-bottom: 3px solid #dee2e6;
+}
+
 main{
     display: flex;
     align-content: space-between;
     min-height: calc(100vh - 329.78px);
+    max-width: 99vw;
 }
 
 h1{
@@ -32,4 +40,34 @@ h1{
 footer{
     height: 120px;
     border: 2px solid #dee2e6;
+    display: flex;
+    justify-content: space-between;
+}
+
+.ads_footer{
+    height: auto;
+    width: 40vw;
+}
+
+.div_footer{
+    height: 95px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.boton_anuncios{
+    height: 50px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.volver_al_inicio{
+    text-decoration: none;
+    color: #a7aaad;
+    font-size: x-large;
+    font-weight: bolder;
+}
+
+.volver_al_inicio:hover{
+    color: black;
 }

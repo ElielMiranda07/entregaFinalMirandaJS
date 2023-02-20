@@ -12,11 +12,11 @@
 <body>
     <header class="container-fluid mb-3 mt-3">
         <h1 class="text-center">Calculador de sueldo neto</h1>
-        <nav>
+        <nav class= "mb-3">
             <ul class="list-group list-group-horizontal justify-content-center">
                 <li class="list-group-item"><button type="submit" id="boton_calcular" class="btn btn-outline-dark btn-lg">Calcular sueldo</button></button></li>
                 <li class="list-group-item"><button type="submit" id="boton_historial" class="btn btn-outline-dark btn-lg">Ver historial</button></button></li>
-                <li class="list-group-item"><button type="submit" id="boton_reiniciar" class="btn btn-outline-dark btn-lg">Reiniciar historial</button></button></li>
+                <li class="list-group-item"><button type="submit" id="boton_vaciar" class="btn btn-outline-dark btn-lg">Vaciar historial</button></button></li>
             </ul>
         </nav>
     </header>
@@ -24,19 +24,25 @@
         <section class="col-12 d-flex justify-content-evenly">
             <article class="col-5 text-center" id="article_ads">
                 <div id="div_ads">
-                    <img src="./media/ads.jpg" alt="" class="ads">
+                    <img src="./media/ads1.jpeg" alt="" class="ads">
                 </div>
             </article>
             <article class="col-5 text-center" id="article_ads_1">
                 <div id="div_ads_1">
-                    <img src="./media/ads.jpg" alt="" class="ads">
+                    <img src="./media/ads2.jpg" alt="" class="ads">
                 </div>
             </article>
         </section>
     </main>
     <footer class="container-fluid mb-1 mt-3">
-        
-    </footer>
+        <div class="div_footer">
+            <img id="ads_footer" src="./media/adsfooter.jpg" alt="" class="ads_footer mt-1">
+        </div>
+            <button id="boton_anuncios" type="button" class="btn btn-outline-danger boton_anuncios">Eliminar anuncios</button>
+        <div class="div_footer">    
+            <img id="ads_footer_1" src="./media/adsfooter.jpg" alt="" class="ads_footer mt-1">
+        </div>
+        </footer>
     <script src="./pages/main.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>

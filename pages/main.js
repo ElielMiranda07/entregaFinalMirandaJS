@@ -24,27 +24,15 @@ if (datos_ingresos_local_local !== null){
 
 let nombre_local = localStorage.getItem("nombre");
 
-if(nombre_local !== null){
-
-    datos_ingresos_local.push(nombre_local);
-
-};
+validarpush(nombre_local, datos_ingresos_local);
 
 let sueldo_neto_local = localStorage.getItem("sueldo");
 
-if(sueldo_neto_local !== null){
-
-    datos_ingresos_local.push(sueldo_neto_local);
-
-};
+validarpush(sueldo_neto_local, datos_ingresos_local);
 
 let email_local = localStorage.getItem("email");
 
-if(email_local !== null){
-
-    datos_ingresos_local.push(email_local);
-
-};
+validarpush(email_local, datos_ingresos_local);
 
 localStorage.setItem("array", JSON.stringify(datos_ingresos_local));
 
@@ -55,6 +43,14 @@ const boton_calcular = document.getElementById("boton_calcular");
 boton_calcular.addEventListener("click", function(event){
 
     event.preventDefault();
+
+    let boton_anuncio = document.getElementById("boton_anuncios");
+
+    if (boton_anuncio){
+
+        boton_anuncio.remove();
+    
+    };
 
     let div_ads = document.getElementById("div_ads");
 
@@ -86,6 +82,15 @@ boton_calcular.addEventListener("click", function(event){
 
     nodo_padre.replaceChild(formulario, div_ads)
 
+    if (boton_calcular && formulario){
+
+        volver_al_inicio = document.createElement("div")
+
+        volver_al_inicio.innerHTML = `<a href=""><button type="submit" class="btn btn-outline-dark btn-lg">Volver al inicio</button></button></a>`;
+
+        boton_calcular.replaceWith(volver_al_inicio);
+
+    };
 
         const boton_enviar = document.getElementById("boton_enviar");
 
@@ -211,7 +216,7 @@ boton_calcular.addEventListener("click", function(event){
                                      <p>$${mostrar_deducciones}<p/>
                                      </div>
                                      <div class="div_mostrar">
-                                     <p><a href="">Volver al inicio</a><p/>
+                                     <p><a class="volver_al_inicio" href="">Volver al inicio</a><p/>
                                      </div>`;
 
             formulario_id.replaceWith(deducciones);
@@ -226,19 +231,19 @@ boton_calcular.addEventListener("click", function(event){
 
 });
 
-const boton_reiniciar = document.getElementById("boton_reiniciar");
-
-boton_reiniciar.addEventListener("click", function(event){
-
-    event.preventDefault();
-
-});
-
 const boton_historial = document.getElementById("boton_historial");
 
 boton_historial.addEventListener("click", function(event){
 
     event.preventDefault();
+
+    let boton_anuncio = document.getElementById("boton_anuncios");
+
+    if (boton_anuncio){
+
+        boton_anuncio.remove();
+    
+    };
 
     let main = document.getElementById("main");
 
@@ -252,15 +257,17 @@ boton_historial.addEventListener("click", function(event){
 
     let nodo_hijo = main.childNodes;
 
-    let cantidad_mostrar = (datos_ingresos_local.length)/3;
+    let cantidad_mostrar = ((datos_ingresos_local.length)/3) - 1;
 
     let volver_al_inicio = document.createElement("div");
 
     volver_al_inicio.className = "div_mostrar container-fluid text-center col-10";
 
-    volver_al_inicio.innerHTML = `<p><a href="">Volver al inicio</a><p/>`;
+    volver_al_inicio.innerHTML = `<p><a class="volver_al_inicio" href="">Volver al inicio</a><p/>`;
 
     main.appendChild(volver_al_inicio);
+
+    let ii = 0;
 
     for(let i = 0; i <= cantidad_mostrar; i++){
 
@@ -270,28 +277,99 @@ boton_historial.addEventListener("click", function(event){
 
         mostrar_historial.className = "div_mostrar container-fluid text-center col-10";
 
-        main.insertBefore(mostrar_historial, nodo_hijo[i]);
-
-    };
-
-    let ii = 0;
-
-    for(let i = 0; i <= cantidad_mostrar; i++){
-
-        let mostrar_historial = document.getElementById("mostrar-" + i);
-
         let mostrar_historial_i = document.createElement("p");
 
         mostrar_historial_i.className = "text-center";
 
         mostrar_historial_i.innerHTML = `Nombre: ${datos_ingresos_local[ii]} - sueldo neto: ${datos_ingresos_local[ii+1]}`;
 
-        mostrar_historial.appendChild(mostrar_historial_i);
+        main.insertBefore(mostrar_historial, nodo_hijo[i]);
+
+        let historial = document.getElementById("mostrar-" + i);
+
+        mostrar_historial_i.innerHTML = `Nombre: ${datos_ingresos_local[ii]} - sueldo neto: ${datos_ingresos_local[ii+1]}`;
+
+        historial.appendChild(mostrar_historial_i);
 
         ii = ii + 3;
 
-    }
+    };
 
+    if (boton_calcular && volver_al_inicio){
+
+        volver_al_inicio = document.createElement("div")
+
+        volver_al_inicio.innerHTML = `<a href=""><button type="submit" class="btn btn-outline-dark btn-lg">Volver al inicio</button></button></a>`;
+
+        boton_calcular.replaceWith(volver_al_inicio);
+
+    };
+
+});
+
+const boton_vaciar = document.getElementById("boton_vaciar");
+
+boton_vaciar.addEventListener("click", function(event){
+
+    event.preventDefault();
+
+    localStorage.clear();
+
+    let cantidad_mostrar = (datos_ingresos_local.length)/3;
+
+    let div_historial = document.getElementById("mostrar-1");
+
+    if(div_historial){
+
+        for(let i = 0; i<= cantidad_mostrar; i++){
+
+            let divs_eliminar = document.getElementById("mostrar-" + i);
+
+            divs_eliminar.remove();
+
+        };
+
+    };
+
+});
+
+const boton_anuncios = document.getElementById("boton_anuncios");
+
+boton_anuncios.addEventListener("click", function(event){
+
+    event.preventDefault();
+
+    let ads = document.getElementById("div_ads");
+
+    let ads1 = document.getElementById("div_ads_1");
+
+    let adsfooter = document.getElementById("ads_footer");
+
+    let adsfooter1 = document.getElementById("ads_footer_1");
+
+    let nuevoads = document.createElement("div")
+
+    nuevoads.innerHTML = `<div id="div_ads">
+                          
+                          </div>`;
+
+    ads.replaceWith(nuevoads);
+
+    let nuevoads1 = document.createElement("div");
+
+    nuevoads1.innerHTML = `<div id="div_ads_1">
+                          
+                           </div>`;
+
+    ads1.replaceWith(nuevoads1);
+
+    adsfooter.remove();
+
+    adsfooter1.remove();
+
+    let boton_anuncio = document.getElementById("boton_anuncios");
+
+    boton_anuncio.remove();
 
 });
 
@@ -364,3 +442,13 @@ function calc_meses_anios (constantes, sueldos_auto){
     return parseFloat(sueldos_auto / constantes.anio).toFixed(2)
 
 }
+
+function validarpush (nombre_local, datos_ingresos_local){
+
+    if(nombre_local !== null){
+
+        datos_ingresos_local.push(nombre_local);
+
+    };
+
+};
