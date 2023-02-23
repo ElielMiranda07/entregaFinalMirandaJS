@@ -12,6 +12,8 @@ const constantes = {
 
 };
 
+let dolar_blue = 372;
+
 let datos_ingresos_local = [];
 
 const datos_ingresos_local_local = localStorage.getItem("array");
@@ -92,46 +94,46 @@ boton_calcular.addEventListener("click", function(event){
 
     };
 
-        const boton_enviar = document.getElementById("boton_enviar");
+    const boton_enviar = document.getElementById("boton_enviar");
 
-        boton_enviar.addEventListener("click", function(event){
+    boton_enviar.addEventListener("click", function(event){
 
-            event.preventDefault();
+        event.preventDefault();
+
+        let nombre = document.getElementsByClassName("nombre")[0].value;
+
+        let ingreso = document.getElementsByClassName("ingreso")[0].value;
+
+        let email = document.getElementsByClassName("email")[0].value;
+
+            if(nombre.length > 0 && ingreso > 0 && email.includes("@")){
 
             let div_ads_1 = document.getElementById("div_ads_1");
 
             let nodo_padre_1 = div_ads_1.parentNode;
-
+    
             let formulario_1 = document.createElement("form")
-
+    
             formulario_1.className = "container-fluid text-center";
-
+    
             formulario_1.innerHTML = `<div id="mostrar_sueldo" class="div_mostrar">
-                
+                    
                                       </div>
                                       <div id="mostrar_smvm" class="div_mostrar">
-
+    
                                       </div>
                                       <div id="mostrar_cbv" class="div_mostrar">
-
+    
                                       </div>
                                       <div id="mostrar_auto" class="div_mostrar">
-
+    
                                       </div>
                                       <div id="mostrar_miami" class="div_mostrar">
-
+    
                                       </div>`;
-
+    
             nodo_padre_1.replaceChild(formulario_1, div_ads_1)
 
-
-            let nombre = document.getElementsByClassName("nombre")[0].value;
-
-            let ingreso = document.getElementsByClassName("ingreso")[0].value;
-
-            let email = document.getElementsByClassName("email")[0].value;
-
-    
             let porcentaje = retenciones(ingreso);
 
             let sueldo_neto = calc_sueldo_neto(ingreso, porcentaje);
@@ -193,7 +195,6 @@ boton_calcular.addEventListener("click", function(event){
 
             document.getElementById("mostrar_miami").appendChild(mostrar_miami);
 
-
             document.getElementsByClassName("ingreso")[0].value = '';
 
             document.getElementsByClassName("nombre")[0].value = '';
@@ -226,6 +227,38 @@ boton_calcular.addEventListener("click", function(event){
             localStorage.setItem("sueldo", (sueldo_neto));
 
             localStorage.setItem("email", (email));
+
+            }
+            else if(nombre.length === 0 || ingreso < 0 || !email.includes("@")){
+
+                let ads_eliminar = document.getElementById("div_ads_1");
+
+                ads_eliminar.remove();
+
+                mensaje_error = document.createElement("div");
+
+                mensaje_error.className = "div_mostrar";
+
+                mensaje_error.innerHTML = `Los datos son incorrectos. Por favor vuelva a iniciar la acción y verifique los datos a ingresar.`;
+
+                let article_padre = document.getElementById("article_ads");
+
+                article_padre.appendChild(mensaje_error);
+
+                document.getElementById("article_ads_1").appendChild(mensaje_error);
+
+
+                let formulario_id = document.getElementById("formulario_id");
+
+                let volver_al_inicio = document.createElement("div")
+
+                volver_al_inicio.className = "container-fluid text-center div_mostrar";
+
+                volver_al_inicio.innerHTML = `<p><a class="volver_al_inicio" href="">Volver al inicio</a><p/>`;
+
+                formulario_id.replaceWith(volver_al_inicio);
+                            
+            };
 
         });
 
