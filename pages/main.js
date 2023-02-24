@@ -12,8 +12,6 @@ const constantes = {
 
 };
 
-let dolar_blue = 372;
-
 let datos_ingresos_local = [];
 
 const datos_ingresos_local_local = localStorage.getItem("array");
@@ -37,8 +35,6 @@ let email_local = localStorage.getItem("email");
 validarpush(email_local, datos_ingresos_local);
 
 localStorage.setItem("array", JSON.stringify(datos_ingresos_local));
-
-console.log(datos_ingresos_local);
 
 const boton_calcular = document.getElementById("boton_calcular");
 
@@ -66,15 +62,15 @@ boton_calcular.addEventListener("click", function(event){
 
     formulario.innerHTML = `<form>
                                 <div class="mb-3">
-                                    <label for="nombre" class="form-label">Nombre</label>
+                                    <label for="nombre" class="form-label fw-semibold">Nombre</label>
                                     <input type="text" class="nombre form-control text-center" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="ingreso" class="form-label">Ingresar sueldo bruto</label>
+                                    <label for="ingreso" class="form-label fw-semibold">Ingresar sueldo bruto</label>
                                     <input type="number" class="ingreso form-control text-center" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="email" class="form-label">Correo electrónico</label>
+                                    <label for="email" class="form-label fw-semibold">Correo electrónico</label>
                                     <input type="email" class="email form-control text-center" required>
                                 </div>
                                 <div>
@@ -112,23 +108,23 @@ boton_calcular.addEventListener("click", function(event){
 
             let nodo_padre_1 = div_ads_1.parentNode;
     
-            let formulario_1 = document.createElement("form")
+            let formulario_1 = document.createElement("div")
     
             formulario_1.className = "container-fluid text-center";
     
-            formulario_1.innerHTML = `<div id="mostrar_sueldo" class="div_mostrar">
+            formulario_1.innerHTML = `<div id="mostrar_sueldo" class="div_mostrar fw-semibold">
                     
                                       </div>
-                                      <div id="mostrar_smvm" class="div_mostrar">
+                                      <div id="mostrar_smvm" class="div_mostrar fw-semibold">
     
                                       </div>
-                                      <div id="mostrar_cbv" class="div_mostrar">
+                                      <div id="mostrar_cbv" class="div_mostrar fw-semibold">
     
                                       </div>
-                                      <div id="mostrar_auto" class="div_mostrar">
+                                      <div id="mostrar_auto" class="div_mostrar fw-semibold">
     
                                       </div>
-                                      <div id="mostrar_miami" class="div_mostrar">
+                                      <div id="mostrar_miami" class="div_mostrar fw-semibold">
     
                                       </div>`;
     
@@ -208,11 +204,11 @@ boton_calcular.addEventListener("click", function(event){
 
             deducciones.className = "container-fluid text-center";
 
-            deducciones.innerHTML = `<div class="div_mostrar">
+            deducciones.innerHTML = `<div class="div_mostrar fw-semibold">
                                      <p>Sueldo Bruto<p/>
                                      <p>$${ingreso}<p/>
                                      </div>
-                                     <div class="div_mostrar">
+                                     <div class="div_mostrar fw-semibold">
                                      <p>Deducciones Totales<p/>
                                      <p>$${mostrar_deducciones}<p/>
                                      </div>
@@ -264,6 +260,8 @@ boton_calcular.addEventListener("click", function(event){
 
 });
 
+let array_sueldos = [];
+
 const boton_historial = document.getElementById("boton_historial");
 
 boton_historial.addEventListener("click", function(event){
@@ -278,8 +276,6 @@ boton_historial.addEventListener("click", function(event){
     
     };
 
-    let main = document.getElementById("main");
-
     let article_eliminar = document.getElementById("article_ads");
 
     article_eliminar.remove();
@@ -288,45 +284,91 @@ boton_historial.addEventListener("click", function(event){
 
     article_eliminar_1.remove();
 
-    let nodo_hijo = main.childNodes;
+    let main = document.getElementById("section");
 
-    let cantidad_mostrar = ((datos_ingresos_local.length)/3) - 1;
+    main.className = "row";
 
-    let volver_al_inicio = document.createElement("div");
+    let section = document.createElement("section");
 
-    volver_al_inicio.className = "div_mostrar container-fluid text-center col-10";
+    section.className = "div_mostrar container-fluid text-center col-10 mb-2";
 
-    volver_al_inicio.innerHTML = `<p><a class="volver_al_inicio" href="">Volver al inicio</a><p/>`;
+    main.appendChild(section);
 
-    main.appendChild(volver_al_inicio);
+    let section_1 = document.createElement("section");
 
-    let ii = 0;
+    section_1.className = "container-fluid text-center col-10 mt-2";
 
-    for(let i = 0; i <= cantidad_mostrar; i++){
+    main.appendChild(section_1);
 
-        let mostrar_historial = document.createElement("div");
+    let cantidad_mostrar = ((datos_ingresos_local.length /3) - 1);
 
-        mostrar_historial.setAttribute("id", "mostrar-" + i)
+    let volver_al_inicio = document.createElement("a");
 
-        mostrar_historial.className = "div_mostrar container-fluid text-center col-10";
+    volver_al_inicio.setAttribute("id", "volver_al_inicio");
 
-        let mostrar_historial_i = document.createElement("p");
+    volver_al_inicio.setAttribute("href", "");
 
-        mostrar_historial_i.className = "text-center";
+    volver_al_inicio.className = "container-fluid text-center col-10 volver_al_inicio";
 
-        mostrar_historial_i.innerHTML = `Nombre: ${datos_ingresos_local[ii]} - sueldo neto: ${datos_ingresos_local[ii+1]}`;
+    volver_al_inicio.textContent = `Volver al inicio`;
 
-        main.insertBefore(mostrar_historial, nodo_hijo[i]);
+    section.appendChild(volver_al_inicio);
 
-        let historial = document.getElementById("mostrar-" + i);
+    let i = 0;
 
-        mostrar_historial_i.innerHTML = `Nombre: ${datos_ingresos_local[ii]} - sueldo neto: ${datos_ingresos_local[ii+1]}`;
+    while(i <= cantidad_mostrar){
 
-        historial.appendChild(mostrar_historial_i);
+        if(datos_ingresos_local.length > (i + 1) * 3){
 
-        ii = ii + 3;
+            let nombre = datos_ingresos_local[i * 3];
+
+            let sueldo_neto = datos_ingresos_local[i * 3 + 1];
+
+            array_sueldos.push(JSON.parse(datos_ingresos_local[i * 3 + 1]));
+
+            let mostrar_historial = document.createElement("div");
+
+            mostrar_historial.setAttribute("id", "mostrar-" + (i + 1))
+
+            mostrar_historial.className = "div_mostrar_historial container-fluid text-center col-10 mb-3 mt-3 fw-semibold";
+
+            mostrar_historial.textContent = `Nombre: ${nombre} - sueldo neto: ${sueldo_neto}`;
+
+            section_1.appendChild(mostrar_historial);
+
+            };
+
+        i++
 
     };
+
+    let sueldo_mas_alto = Math.max.apply(null, array_sueldos);
+
+    let coincidencias = [];
+
+    for(let i = 0; i < datos_ingresos_local.length; i++){
+
+        if(datos_ingresos_local[i] == sueldo_mas_alto){
+
+            coincidencias.push(i);
+
+        };
+
+    };
+
+    let mostrar_sueldo_mas_alto = document.createElement("p");
+
+    mostrar_sueldo_mas_alto.setAttribute("id", "mostrar_sueldo_mas_alto");
+
+    mostrar_sueldo_mas_alto.className = "container-fluid text-center col-10 fw-semibold";
+
+    mostrar_sueldo_mas_alto.textContent = `El sueldo neto más alto es: $${sueldo_mas_alto}, y fue calculado por ${datos_ingresos_local[coincidencias[0] - 1]}.`;
+
+    if(cantidad_mostrar > 1){
+
+        section.appendChild(mostrar_sueldo_mas_alto);
+
+    }
 
     if (boton_calcular && volver_al_inicio){
 
@@ -348,13 +390,13 @@ boton_vaciar.addEventListener("click", function(event){
 
     localStorage.clear();
 
-    let cantidad_mostrar = (datos_ingresos_local.length)/3;
+    let cantidad_mostrar = (datos_ingresos_local.length)/3 - 1;
 
     let div_historial = document.getElementById("mostrar-1");
 
     if(div_historial){
 
-        for(let i = 0; i<= cantidad_mostrar; i++){
+        for(let i = 1; i<= cantidad_mostrar; i++){
 
             let divs_eliminar = document.getElementById("mostrar-" + i);
 
@@ -363,6 +405,14 @@ boton_vaciar.addEventListener("click", function(event){
         };
 
     };
+
+    let mostrar_sueldo_mas_alto = document.getElementById("mostrar_sueldo_mas_alto");
+
+    if(mostrar_sueldo_mas_alto){
+
+        mostrar_sueldo_mas_alto.remove();
+
+    }
 
 });
 
