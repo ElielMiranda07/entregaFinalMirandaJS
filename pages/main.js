@@ -1,3 +1,69 @@
+//Fetch's
+let cotizacion_dolar;
+let cotizacion_dolar_oficial;
+let cotizacion_dolar_blue = "";
+
+fetch('https://www.dolarsi.com/api/api.php?type=valoresprincipales', { mode: 'cors' })
+  .then(response => response.json())
+  .then(data => {
+
+    cotizacion_dolar = data;
+
+    cotizacion_dolar_oficial = data[0].casa.compra;
+
+    cotizacion_dolar_blue = data[1].casa.compra;
+
+    let p_dolar_o = document.getElementById("dolar_oficial");
+
+    let mostrar_dolar_oficial = document.createElement("p");
+
+    mostrar_dolar_oficial.className = "fw-semibold";
+
+    mostrar_dolar_oficial.textContent = `$${cotizacion_dolar_oficial}`;
+
+    p_dolar_o.replaceWith(mostrar_dolar_oficial);
+
+    let p_dolar_b = document.getElementById("dolar_blue");
+
+    let mostrar_dolar_blue = document.createElement("p");
+
+    mostrar_dolar_blue.className = "fw-semibold";
+
+    mostrar_dolar_blue.textContent = `$${cotizacion_dolar_blue}`;
+
+    p_dolar_b.replaceWith(mostrar_dolar_blue);
+
+  })
+  .catch(error => {
+    console.error(error);
+  });
+
+
+let fecha = new Date();
+
+let fecha_actual = fecha.toISOString().slice(0, 10);
+
+let hora_actual = fecha.toTimeString().slice(0, 5);
+
+let div_mostrar_hora_fecha = document.getElementById("div_hora_fecha");
+
+let mostrar_fecha = document.createElement("p");
+
+mostrar_fecha.className = "fw-semibold text-center";
+
+mostrar_fecha.textContent = `${fecha_actual}`;
+
+div_mostrar_hora_fecha.appendChild(mostrar_fecha);
+
+let mostrar_hora = document.createElement("p");
+
+mostrar_hora.className = "fw-semibold text-center";
+
+mostrar_hora.textContent = `${hora_actual}`;
+
+div_mostrar_hora_fecha.appendChild(mostrar_hora);
+
+
 const constantes = {
 
     smvm: 67743,
@@ -20,7 +86,7 @@ if (datos_ingresos_local_local !== null){
     
     datos_ingresos_local = JSON.parse(datos_ingresos_local_local);
 
-    };
+};
 
 let nombre_local = localStorage.getItem("nombre");
 

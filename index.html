@@ -10,14 +10,33 @@
     <link rel="stylesheet" href="./style/style.css">
 </head>
 <body>
+    <nav class="nav_principal d-flex justify-content-end">
+        <div id="div_hora_fecha" class="d-flex justify-content-evenly">
+
+        </div>
+    </nav>
     <header class="container-fluid mb-3 mt-3">
         <h1 class="text-center">Calculador de sueldo neto</h1>
-        <nav class= "mb-3">
+        <nav class= "d-flex mb-3 justify-content-evenly navbar">
+            <div class="card_cotizacion text-center">
+                <div class="m-2">
+                    <h2>Dolar Oficial</h2>
+                    <h3>hoy</h3>
+                    <p class="fw-semibold" id="dolar_oficial">$190</p>
+                </div>
+            </div>
             <ul class="list-group list-group-horizontal justify-content-center">
                 <li class="list-group-item"><button type="submit" id="boton_calcular" class="btn btn-outline-dark btn-lg">Calcular sueldo</button></button></li>
                 <li class="list-group-item"><button type="submit" id="boton_historial" class="btn btn-outline-dark btn-lg">Ver historial</button></button></li>
                 <li class="list-group-item"><button type="submit" id="boton_vaciar" class="btn btn-outline-dark btn-lg">Vaciar historial</button></button></li>
             </ul>
+            <div class="card_cotizacion text-center">
+                <div class="m-2">
+                    <h2>Dolar Blue</h2>
+                    <h3>hoy</h3>
+                    <p class="fw-semibold" id="dolar_blue">$370</p>
+                </div>
+            </div>
         </nav>
     </header>
     <main id="main" class="row">

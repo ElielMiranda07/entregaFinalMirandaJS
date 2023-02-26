@@ -4,6 +4,16 @@
     box-sizing: border-box;
 }
 
+.nav_principal{
+    height: 30px;
+}
+
+#div_hora_fecha{
+    height: 25px;
+    width: 150px;
+    border: 2px solid #dee2e6;
+}
+
 header{
     position: sticky;
     top: 0;
@@ -11,10 +21,30 @@ header{
     border-bottom: 3px solid #dee2e6;
 }
 
+.navbar{
+    display: flex;
+    align-content: center;
+}
+
+.card_cotizacion{
+    border: 4px solid #dee2e6;
+    border-radius: 5px;
+    height: 112px;
+    width: 124px;
+}
+
+.card_cotizacion h2{
+    font-size: large;
+}
+
+.card_cotizacion h3{
+    font-size: medium;
+}
+
 main{
     display: flex;
     align-content: space-between;
-    min-height: calc(100vh - 329.78px);
+    min-height: calc(100vh - 440px);
     max-width: 99vw;
 }
 
