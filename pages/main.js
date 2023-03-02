@@ -82,23 +82,30 @@ let datos_ingresos_local = [];
 
 const datos_ingresos_local_local = localStorage.getItem("array");
 
+
 if (datos_ingresos_local_local !== null){
     
     datos_ingresos_local = JSON.parse(datos_ingresos_local_local);
 
 };
 
+let nombre_validar = datos_ingresos_local[(datos_ingresos_local.length) - 3];
+
+let sueldo_neto_validar = datos_ingresos_local[(datos_ingresos_local.length) - 2];
+
+let email_validar = datos_ingresos_local[(datos_ingresos_local.length) - 1];
+
 let nombre_local = localStorage.getItem("nombre");
 
-validarpush(nombre_local, datos_ingresos_local);
+validarpush(nombre_local, datos_ingresos_local, nombre_validar);
 
 let sueldo_neto_local = localStorage.getItem("sueldo");
 
-validarpush(sueldo_neto_local, datos_ingresos_local);
+validarpush(sueldo_neto_local, datos_ingresos_local, sueldo_neto_validar);
 
 let email_local = localStorage.getItem("email");
 
-validarpush(email_local, datos_ingresos_local);
+validarpush(email_local, datos_ingresos_local, email_validar);
 
 localStorage.setItem("array", JSON.stringify(datos_ingresos_local));
 
@@ -366,7 +373,7 @@ boton_historial.addEventListener("click", function(event){
 
     main.appendChild(section_1);
 
-    let cantidad_mostrar = ((datos_ingresos_local.length /3) - 1);
+    let cantidad_mostrar = ((datos_ingresos_local.length /3) + 1);
 
     let volver_al_inicio = document.createElement("a");
 
@@ -382,9 +389,9 @@ boton_historial.addEventListener("click", function(event){
 
     let i = 0;
 
-    while(i <= cantidad_mostrar){
+    while(i < cantidad_mostrar){
 
-        if(datos_ingresos_local.length > (i + 1) * 3){
+        if(datos_ingresos_local.length > (i * 3)){
 
             let nombre = datos_ingresos_local[i * 3];
 
@@ -456,7 +463,7 @@ boton_vaciar.addEventListener("click", function(event){
 
     localStorage.clear();
 
-    let cantidad_mostrar = (datos_ingresos_local.length)/3 - 1;
+    let cantidad_mostrar = (datos_ingresos_local.length)/3;
 
     let div_historial = document.getElementById("mostrar-1");
 
@@ -592,9 +599,9 @@ function calc_meses_anios (constantes, sueldos_auto){
 
 }
 
-function validarpush (nombre_local, datos_ingresos_local){
+function validarpush (nombre_local, datos_ingresos_local, nombre_validar){
 
-    if(nombre_local !== null){
+    if(nombre_local !== null && nombre_validar !== nombre_local){
 
         datos_ingresos_local.push(nombre_local);
 

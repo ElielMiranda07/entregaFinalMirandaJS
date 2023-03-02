@@ -6,6 +6,8 @@
 
 .nav_principal{
     height: 30px;
+    position: sticky;
+    top: 0;
 }
 
 #div_hora_fecha{
@@ -16,7 +18,7 @@
 
 header{
     position: sticky;
-    top: 0;
+    top: 30px;
     background-color: white;
     border-bottom: 3px solid #dee2e6;
 }
