@@ -1,42 +1,48 @@
-//Fetch's
 let cotizacion_dolar;
+
 let cotizacion_dolar_oficial;
-let cotizacion_dolar_blue = "";
+
+let cotizacion_dolar_blue;
 
 fetch('https://www.dolarsi.com/api/api.php?type=valoresprincipales', { mode: 'cors' })
-  .then(response => response.json())
-  .then(data => {
+  
+    .then(response => response.json())
+  
+    .then(data => {
 
-    cotizacion_dolar = data;
+        cotizacion_dolar = data;
 
-    cotizacion_dolar_oficial = data[0].casa.compra;
+        cotizacion_dolar_oficial = data[0].casa.compra;
 
-    cotizacion_dolar_blue = data[1].casa.compra;
+        cotizacion_dolar_blue = data[1].casa.compra;
 
-    let p_dolar_o = document.getElementById("dolar_oficial");
+        let p_dolar_o = document.getElementById("dolar_oficial");
 
-    let mostrar_dolar_oficial = document.createElement("p");
+        let mostrar_dolar_oficial = document.createElement("p");
 
-    mostrar_dolar_oficial.className = "fw-semibold";
+        mostrar_dolar_oficial.className = "fw-semibold";
 
-    mostrar_dolar_oficial.textContent = `$${cotizacion_dolar_oficial}`;
+        mostrar_dolar_oficial.textContent = `$${cotizacion_dolar_oficial}`;
 
-    p_dolar_o.replaceWith(mostrar_dolar_oficial);
+        p_dolar_o.replaceWith(mostrar_dolar_oficial);
 
-    let p_dolar_b = document.getElementById("dolar_blue");
+        let p_dolar_b = document.getElementById("dolar_blue");
 
-    let mostrar_dolar_blue = document.createElement("p");
+        let mostrar_dolar_blue = document.createElement("p");
 
-    mostrar_dolar_blue.className = "fw-semibold";
+        mostrar_dolar_blue.className = "fw-semibold";
 
-    mostrar_dolar_blue.textContent = `$${cotizacion_dolar_blue}`;
+        mostrar_dolar_blue.textContent = `$${cotizacion_dolar_blue}`;
 
-    p_dolar_b.replaceWith(mostrar_dolar_blue);
+        p_dolar_b.replaceWith(mostrar_dolar_blue);
 
-  })
-  .catch(error => {
-    console.error(error);
-  });
+    })
+    
+    .catch(error => {
+    
+        console.error(error);
+        
+});
 
 
 let fecha = new Date();
@@ -175,157 +181,158 @@ boton_calcular.addEventListener("click", function(event){
 
         let email = document.getElementsByClassName("email")[0].value;
 
-            if(nombre.length > 0 && ingreso > 0 && email.includes("@")){
+            if(nombre.length > 0 && ingreso > 0 && email.includes("@") && email.length > 0){
 
-            let div_ads_1 = document.getElementById("div_ads_1");
+                let div_ads_1 = document.getElementById("div_ads_1");
 
-            let nodo_padre_1 = div_ads_1.parentNode;
+                let nodo_padre_1 = div_ads_1.parentNode;
     
-            let formulario_1 = document.createElement("div")
+                let formulario_1 = document.createElement("div")
     
-            formulario_1.className = "container-fluid text-center";
+                formulario_1.className = "container-fluid text-center";
     
-            formulario_1.innerHTML = `<div id="mostrar_sueldo" class="div_mostrar fw-semibold">
+                formulario_1.innerHTML = `<div id="mostrar_sueldo" class="div_mostrar fw-semibold">
                     
-                                      </div>
-                                      <div id="mostrar_smvm" class="div_mostrar fw-semibold">
+                                          </div>
+                                          <div id="mostrar_smvm" class="div_mostrar fw-semibold">
     
-                                      </div>
-                                      <div id="mostrar_cbv" class="div_mostrar fw-semibold">
+                                          </div>
+                                          <div id="mostrar_cbv" class="div_mostrar fw-semibold">
     
-                                      </div>
-                                      <div id="mostrar_auto" class="div_mostrar fw-semibold">
+                                          </div>
+                                          <div id="mostrar_auto" class="div_mostrar fw-semibold">
     
-                                      </div>
-                                      <div id="mostrar_miami" class="div_mostrar fw-semibold">
+                                          </div>
+                                          <div id="mostrar_miami" class="div_mostrar fw-semibold">
     
-                                      </div>`;
+                                          </div>`;
     
-            nodo_padre_1.replaceChild(formulario_1, div_ads_1)
+                nodo_padre_1.replaceChild(formulario_1, div_ads_1)
 
-            let porcentaje = retenciones(ingreso);
+                let porcentaje = retenciones(ingreso);
 
-            let sueldo_neto = calc_sueldo_neto(ingreso, porcentaje);
+                let sueldo_neto = calc_sueldo_neto(ingreso, porcentaje);
 
-            let dif_smvm = calc_dif (sueldo_neto, constantes);
+                let dif_smvm = calc_dif (sueldo_neto, constantes);
 
-            let dif_cbv = calc_dif_1 (sueldo_neto, constantes);
+                let dif_cbv = calc_dif_1 (sueldo_neto, constantes);
 
-            let sueldos_auto = calc_sueldos (sueldo_neto, constantes);
+                let sueldos_auto = calc_sueldos (sueldo_neto, constantes);
 
-            let sueldos_miami = calc_sueldos_1 (sueldo_neto, constantes);
+                let sueldos_miami = calc_sueldos_1 (sueldo_neto, constantes);
 
-            let sueldos_anios = calc_meses_anios (constantes, sueldos_auto);
+                let sueldos_anios = calc_meses_anios (constantes, sueldos_auto);
 
-            let sueldos_anios_1 = calc_meses_anios (constantes, sueldos_miami)
-
-
-            let mostrar_sueldo = document.createElement("p");
-
-            mostrar_sueldo.innerHTML = `${nombre}, tu sueldo neto es de: $${sueldo_neto}.`;
-
-            document.getElementById("mostrar_sueldo").innerHTML = '';
-
-            document.getElementById("mostrar_sueldo").appendChild(mostrar_sueldo);
+                let sueldos_anios_1 = calc_meses_anios (constantes, sueldos_miami)
 
 
-            let mostrar_smvm = document.createElement("p");
+                let mostrar_sueldo = document.createElement("p");
 
-            mostrar_smvm.innerHTML = `La diferencia con el SMVM es de: $${dif_smvm}. El Sueldo Mínimo, Vital y Móvil es de: $${constantes.smvm}.`;
+                mostrar_sueldo.innerHTML = `${nombre}, tu sueldo neto es de: $${sueldo_neto}.`;
 
-            document.getElementById("mostrar_smvm").innerHTML = '';
+                document.getElementById("mostrar_sueldo").innerHTML = '';
 
-            document.getElementById("mostrar_smvm").appendChild(mostrar_smvm);
-
-
-            let mostrar_cbv = document.createElement("p");
-
-            mostrar_cbv.innerHTML = `La diferencia con el CBV es de: $${dif_cbv}. La Canasta Básica Vigente tiene un valor de: $${constantes.cbv}.`;
-
-            document.getElementById("mostrar_cbv").innerHTML = '';
-
-            document.getElementById("mostrar_cbv").appendChild(mostrar_cbv);
+                document.getElementById("mostrar_sueldo").appendChild(mostrar_sueldo);
 
 
-            let mostrar_auto = document.createElement("p");
+                let mostrar_smvm = document.createElement("p");
 
-            mostrar_auto.innerHTML = `Necesitas un total de ${sueldos_auto} meses para comprar el auto 0km más barato del mercado (${sueldos_anios} años). El Toyota Etios es el auto más barato del mercado con un valor de $${constantes.auto}, podés verlo <a target="_blank" href="https://auto.mercadolibre.com.ar/MLA-899841591-toyota-etios-15-x-5p-_JM#position=2&search_layout=grid&type=item&tracking_id=265f10c1-c8a8-4d2d-b907-0d75054bb4b6">aquí<a/>.`;
+                mostrar_smvm.innerHTML = `La diferencia con el SMVM es de: $${dif_smvm}. El Sueldo Mínimo, Vital y Móvil es de: $${constantes.smvm}.`;
 
-            document.getElementById("mostrar_auto").innerHTML = '';
+                document.getElementById("mostrar_smvm").innerHTML = '';
 
-            document.getElementById("mostrar_auto").appendChild(mostrar_auto);
+                document.getElementById("mostrar_smvm").appendChild(mostrar_smvm);
 
 
-            let mostrar_miami = document.createElement("p");
+                let mostrar_cbv = document.createElement("p");
 
-            mostrar_miami.innerHTML = `Necesitas un total de ${sueldos_miami} meses para comprar una mansión en Miami, si, lamentablemente serían ${sueldos_anios_1} años. Si te le animás <a target="_blank" href="https://mansionesmiami.com/property/5420-sw-72nd-ave-miami-fl-33155-a11343433/">acá<a/> podes verla.`;
+                mostrar_cbv.innerHTML = `La diferencia con el CBV es de: $${dif_cbv}. La Canasta Básica Vigente tiene un valor de: $${constantes.cbv}.`;
 
-            document.getElementById("mostrar_miami").innerHTML = '';
+                document.getElementById("mostrar_cbv").innerHTML = '';
 
-            document.getElementById("mostrar_miami").appendChild(mostrar_miami);
+                document.getElementById("mostrar_cbv").appendChild(mostrar_cbv);
 
-            document.getElementsByClassName("ingreso")[0].value = '';
 
-            document.getElementsByClassName("nombre")[0].value = '';
+                let mostrar_auto = document.createElement("p");
+
+                mostrar_auto.innerHTML = `Necesitas un total de ${sueldos_auto} meses para comprar el auto 0km más barato del mercado (${sueldos_anios} años). El Toyota Etios es el auto más barato del mercado con un valor de $${constantes.auto}, podés verlo <a target="_blank" href="https://auto.mercadolibre.com.ar/MLA-899841591-toyota-etios-15-x-5p-_JM#position=2&search_layout=grid&type=item&tracking_id=265f10c1-c8a8-4d2d-b907-0d75054bb4b6">aquí<a/>.`;
+
+                document.getElementById("mostrar_auto").innerHTML = '';
+
+                document.getElementById("mostrar_auto").appendChild(mostrar_auto);
+
+
+                let mostrar_miami = document.createElement("p");
+
+                mostrar_miami.innerHTML = `Necesitas un total de ${sueldos_miami} meses para comprar una mansión en Miami, si, lamentablemente serían ${sueldos_anios_1} años. Si te le animás <a target="_blank" href="https://mansionesmiami.com/property/5420-sw-72nd-ave-miami-fl-33155-a11343433/">acá<a/> podes verla.`;
+
+                document.getElementById("mostrar_miami").innerHTML = '';
+
+                document.getElementById("mostrar_miami").appendChild(mostrar_miami);
+
+                document.getElementsByClassName("ingreso")[0].value = '';
+
+                document.getElementsByClassName("nombre")[0].value = '';
 
             
-            let mostrar_deducciones = ingreso - sueldo_neto;
+                let mostrar_deducciones = ingreso - sueldo_neto;
 
-            let formulario_id = document.getElementById("formulario_id");
+                let formulario_id = document.getElementById("formulario_id");
 
-            let deducciones = document.createElement("div")
+                let deducciones = document.createElement("div")
 
-            deducciones.className = "container-fluid text-center";
+                deducciones.className = "container-fluid text-center";
 
-            deducciones.innerHTML = `<div class="div_mostrar fw-semibold">
-                                     <p>Sueldo Bruto<p/>
-                                     <p>$${ingreso}<p/>
-                                     </div>
-                                     <div class="div_mostrar fw-semibold">
-                                     <p>Deducciones Totales<p/>
-                                     <p>$${mostrar_deducciones}<p/>
-                                     </div>
-                                     <div class="div_mostrar">
-                                     <p><a class="volver_al_inicio" href="">Volver al inicio</a><p/>
-                                     </div>`;
+                deducciones.innerHTML = `<div class="div_mostrar fw-semibold">
+                                         <p>Sueldo Bruto<p/>
+                                         <p>$${ingreso}<p/>
+                                         </div>
+                                         <div class="div_mostrar fw-semibold">
+                                         <p>Deducciones Totales<p/>
+                                         <p>$${mostrar_deducciones}<p/>
+                                         </div>
+                                         <div class="div_mostrar">
+                                         <p><a class="volver_al_inicio" href="">Volver al inicio</a><p/>
+                                         </div>`;
 
-            formulario_id.replaceWith(deducciones);
+                formulario_id.replaceWith(deducciones);
 
-            localStorage.setItem("nombre", (nombre));
+                localStorage.setItem("nombre", (nombre));
 
-            localStorage.setItem("sueldo", (sueldo_neto));
+                localStorage.setItem("sueldo", (sueldo_neto));
 
-            localStorage.setItem("email", (email));
+                localStorage.setItem("email", (email));
 
             }
             else if(nombre.length === 0 || ingreso < 0 || !email.includes("@")){
 
-                let ads_eliminar = document.getElementById("div_ads_1");
+                let ads_eliminar = document.getElementById("article_ads_1");
 
                 ads_eliminar.remove();
 
-                mensaje_error = document.createElement("div");
+                let ads_eliminar_1 = document.getElementById("article_ads");
 
-                mensaje_error.className = "div_mostrar";
+                ads_eliminar_1.remove();
 
-                mensaje_error.innerHTML = `Los datos son incorrectos. Por favor vuelva a iniciar la acción y verifique los datos a ingresar.`;
-
-                let article_padre = document.getElementById("article_ads");
-
-                article_padre.appendChild(mensaje_error);
-
-                document.getElementById("article_ads_1").appendChild(mensaje_error);
-
-
-                let formulario_id = document.getElementById("formulario_id");
+                let volver_al_inicio_1 = document.getElementById("section");
 
                 let volver_al_inicio = document.createElement("div")
 
-                volver_al_inicio.className = "container-fluid text-center div_mostrar";
+                volver_al_inicio.className = "col-6 text-center div_mostrar";
 
                 volver_al_inicio.innerHTML = `<p><a class="volver_al_inicio" href="">Volver al inicio</a><p/>`;
 
-                formulario_id.replaceWith(volver_al_inicio);
+                volver_al_inicio_1.appendChild(volver_al_inicio);
+
+                Swal.fire({
+                    title: 'Así, no.',
+                    text: 'Tus datos están mal, ¡verificalos antes de ingresarlos!',
+                    imageUrl: 'https://media.tenor.com/Pucp7rmPfrkAAAAC/mirtha-legrand-asi-no.gif',
+                    imageWidth: 400,
+                    imageHeight: 200,
+                    imageAlt: 'Custom image',
+                    footer: '<a class="volver_al_inicio" href="">Volver al inicio</a>'
+                })
                             
             };
 
@@ -337,119 +344,145 @@ let array_sueldos = [];
 
 const boton_historial = document.getElementById("boton_historial");
 
-boton_historial.addEventListener("click", function(event){
+let boton_historial_clicked = false;
 
-    event.preventDefault();
+boton_historial.addEventListener("click", function(){
 
-    let boton_anuncio = document.getElementById("boton_anuncios");
+    if (!boton_historial_clicked) {
 
-    if (boton_anuncio){
+        boton_historial_clicked = true;
 
-        boton_anuncio.remove();
+        let boton_anuncio = document.getElementById("boton_anuncios");
+
+        if (boton_anuncio){
+
+            boton_anuncio.remove();
     
-    };
+        };
 
-    let article_eliminar = document.getElementById("article_ads");
+        if (boton_calcular){
 
-    article_eliminar.remove();
+            let volver_al_inicio = document.createElement("div")
 
-    let article_eliminar_1 = document.getElementById("article_ads_1");
+            volver_al_inicio.innerHTML = `<a href=""><button type="submit" class="btn btn-outline-dark btn-lg">Volver al inicio</button></button></a>`;
 
-    article_eliminar_1.remove();
-
-    let main = document.getElementById("section");
-
-    main.className = "row";
-
-    let section = document.createElement("section");
-
-    section.className = "div_mostrar container-fluid text-center col-10 mb-2";
-
-    main.appendChild(section);
-
-    let section_1 = document.createElement("section");
-
-    section_1.className = "container-fluid text-center col-10 mt-2";
-
-    main.appendChild(section_1);
-
-    let cantidad_mostrar = ((datos_ingresos_local.length /3) + 1);
-
-    let volver_al_inicio = document.createElement("a");
-
-    volver_al_inicio.setAttribute("id", "volver_al_inicio");
-
-    volver_al_inicio.setAttribute("href", "");
-
-    volver_al_inicio.className = "container-fluid text-center col-10 volver_al_inicio";
-
-    volver_al_inicio.textContent = `Volver al inicio`;
-
-    section.appendChild(volver_al_inicio);
-
-    let i = 0;
-
-    while(i < cantidad_mostrar){
-
-        if(datos_ingresos_local.length > (i * 3)){
-
-            let nombre = datos_ingresos_local[i * 3];
-
-            let sueldo_neto = datos_ingresos_local[i * 3 + 1];
-
-            array_sueldos.push(JSON.parse(datos_ingresos_local[i * 3 + 1]));
-
-            let mostrar_historial = document.createElement("div");
-
-            mostrar_historial.setAttribute("id", "mostrar-" + (i + 1))
-
-            mostrar_historial.className = "div_mostrar_historial container-fluid text-center col-10 mb-3 mt-3 fw-semibold";
-
-            mostrar_historial.textContent = `Nombre: ${nombre} - sueldo neto: ${sueldo_neto}`;
-
-            section_1.appendChild(mostrar_historial);
-
-            };
-
-        i++
-
-    };
-
-    let sueldo_mas_alto = Math.max.apply(null, array_sueldos);
-
-    let coincidencias = [];
-
-    for(let i = 0; i < datos_ingresos_local.length; i++){
-
-        if(datos_ingresos_local[i] == sueldo_mas_alto){
-
-            coincidencias.push(i);
+            boton_calcular.replaceWith(volver_al_inicio);
 
         };
 
-    };
+        let article_eliminar = document.getElementById("article_ads");
 
-    let mostrar_sueldo_mas_alto = document.createElement("p");
+        if(article_eliminar){
 
-    mostrar_sueldo_mas_alto.setAttribute("id", "mostrar_sueldo_mas_alto");
+            article_eliminar.remove();
 
-    mostrar_sueldo_mas_alto.className = "container-fluid text-center col-10 fw-semibold";
+        }
 
-    mostrar_sueldo_mas_alto.textContent = `El sueldo neto más alto es: $${sueldo_mas_alto}, y fue calculado por ${datos_ingresos_local[coincidencias[0] - 1]}.`;
+        let article_eliminar_1 = document.getElementById("article_ads_1");
 
-    if(cantidad_mostrar > 1){
+        if(article_eliminar_1){
 
-        section.appendChild(mostrar_sueldo_mas_alto);
+            article_eliminar_1.remove();
 
-    }
+        }
 
-    if (boton_calcular && volver_al_inicio){
+        let main = document.getElementById("section");
 
-        volver_al_inicio = document.createElement("div")
+        main.className = "row";
 
-        volver_al_inicio.innerHTML = `<a href=""><button type="submit" class="btn btn-outline-dark btn-lg">Volver al inicio</button></button></a>`;
+        let section = document.createElement("section");
 
-        boton_calcular.replaceWith(volver_al_inicio);
+        section.className = "div_mostrar container-fluid text-center col-10 mb-2";
+
+        main.appendChild(section);
+
+        let section_1 = document.createElement("section");
+
+        section_1.className = "container-fluid text-center col-10 mt-2";
+
+        main.appendChild(section_1);
+
+        let cantidad_mostrar = ((datos_ingresos_local.length /3) + 1);
+
+        let volver_al_inicio = document.createElement("a");
+
+        volver_al_inicio.setAttribute("id", "volver_al_inicio");
+
+        volver_al_inicio.setAttribute("href", "");
+
+        volver_al_inicio.className = "container-fluid text-center col-10 volver_al_inicio";
+
+        volver_al_inicio.textContent = `Volver al inicio`;
+
+        section.appendChild(volver_al_inicio);
+
+        let i = 0;
+
+        while(i < cantidad_mostrar){
+
+            if(datos_ingresos_local.length > (i * 3)){
+
+                let nombre = datos_ingresos_local[i * 3];
+
+                let sueldo_neto = datos_ingresos_local[i * 3 + 1];
+
+                array_sueldos.push(JSON.parse(datos_ingresos_local[i * 3 + 1]));
+
+                let mostrar_historial = document.createElement("div");
+
+                mostrar_historial.setAttribute("id", "mostrar-" + (i + 1))
+
+                mostrar_historial.className = "div_mostrar_historial container-fluid text-center col-10 mb-3 mt-3 fw-semibold";
+
+                mostrar_historial.textContent = `Nombre: ${nombre} - sueldo neto: ${sueldo_neto}`;
+
+                section_1.appendChild(mostrar_historial);
+
+                };
+
+            i++
+
+        };
+
+        let sueldo_mas_alto = Math.max.apply(null, array_sueldos);
+
+        let coincidencias = [];
+
+        for(let i = 0; i < datos_ingresos_local.length; i++){
+
+            if(datos_ingresos_local[i] == sueldo_mas_alto){
+
+                coincidencias.push(i);
+
+            };
+
+        };
+
+        let mostrar_sueldo_mas_alto = document.createElement("p");
+
+        mostrar_sueldo_mas_alto.setAttribute("id", "mostrar_sueldo_mas_alto");
+
+        mostrar_sueldo_mas_alto.className = "container-fluid text-center col-10 fw-semibold";
+
+        mostrar_sueldo_mas_alto.textContent = `El sueldo neto más alto es: $${sueldo_mas_alto}, y fue calculado por ${datos_ingresos_local[coincidencias[0] - 1]}.`;
+
+        if(cantidad_mostrar > 1){
+
+            section.appendChild(mostrar_sueldo_mas_alto);
+
+        };
+
+        if (boton_calcular && volver_al_inicio){
+
+            volver_al_inicio = document.createElement("div")
+
+            volver_al_inicio.innerHTML = `<a href=""><button type="submit" class="btn btn-outline-dark btn-lg">Volver al inicio</button></button></a>`;
+
+            boton_calcular.replaceWith(volver_al_inicio);
+
+        };
+
+        boton_historial.removeEventListener("click", arguments.callee);
 
     };
 
